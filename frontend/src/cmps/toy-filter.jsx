@@ -32,7 +32,6 @@ export function ToyFilter({ onSetFilter }) {
     function handleSelect(data) {
         setSelectedOptions(data)
         const labelsToSet = data.length ? data.map(i => i.value) : []
-        console.log(labelsToSet)
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, labels: labelsToSet }))
     }
 
