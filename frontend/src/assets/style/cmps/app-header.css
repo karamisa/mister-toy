@@ -1,0 +1,22 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+.app-header div{
+  width: min-content;
+}
+.app-header nav {
+  display: flex;
+  align-items: center;
+}
+
+.app-header nav a {
+  color: #fff;
+  margin-inline: 20px;
+  font-size: larger;
+}
+
+
