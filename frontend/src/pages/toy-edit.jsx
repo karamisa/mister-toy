@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import ReactSelect from "react-select"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { toyService } from "../services/toy.service"
 import { saveToy } from "../store/toy.action"
 
@@ -42,6 +43,14 @@ export function ToyEdit() {
     function onSaveToy(ev) {
         ev.preventDefault()
         saveToy(toyToEdit)
+        .then(() => {
+            showSuccessMsg('Toy saved!')
+            navigate('/toy')
+        })
+        .catch(err => {
+            showErrorMsg('Cannot save toy')
+        })
+
     }
 
     return (

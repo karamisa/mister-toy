@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import { ToyFilter } from '../cmps/toy-filter.jsx'
 import { ToyList } from '../cmps/toy-list.jsx'
-
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { loadToys, removeToy } from '../store/toy.action.js'
 
 export function ToyApp() {
@@ -18,10 +19,10 @@ export function ToyApp() {
     function onLoadToys(filterBy) {
         loadToys(filterBy)
             .then(() => {
-                // showSuccessMsg('Toys loaded')
+                showSuccessMsg('Toys loaded')
             })
             .catch(err => {
-                // showErrorMsg('Cannot load toys')
+                showErrorMsg('Cannot load toys')
                 console.log("err", err)
             })
     }
@@ -29,10 +30,10 @@ export function ToyApp() {
     function onRemoveToy(toyId) {
         removeToy(toyId)
             .then(() => {
-                // showSuccessMsg('Toy removed')
+                showSuccessMsg('Toy removed')
             })
             .catch(err => {
-                // showErrorMsg('Cannot remove toy')
+                showErrorMsg('Cannot remove toy')
             })
     }
 

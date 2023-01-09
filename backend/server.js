@@ -74,7 +74,6 @@ app.post('/api/toy', (req, res) => {
 // Update
 app.put('/api/toy', (req, res) => {
     const toy = req.body
-    console.log('TOY ---------', toy)
     toyService.save(toy)
         .then((savedToy) => {
             res.send(savedToy)

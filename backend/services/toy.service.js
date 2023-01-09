@@ -16,8 +16,8 @@ function query(filterBy = _getDefaultFilter()) {
         const regex = new RegExp(filterBy.name, 'i')
         filteredToys = filteredToys.filter(toy => regex.test(toy.name))
     }
-    if (filterBy.inStock) filteredToys = filteredToys.filter(toy => toy.inStock)
-    if (filterBy.labels) filteredToys = filteredToys.filter(toy => filterBy.labels.every(i => toy.labels.includes(i)))
+    if (filterBy.inStock==='true') filteredToys = filteredToys.filter(toy => toy.inStock)
+    if (filterBy.labels.length) filteredToys = filteredToys.filter(toy => filterBy.labels.every(i => toy.labels.includes(i)))
 
     //SORT
     if (filterBy.sortBy === 'name') {
@@ -49,13 +49,16 @@ function save(toy) {
     if (toy._id) {
         const toyToUpdate = toys.find(currToy => currToy._id === toy._id)
         if (!toyToUpdate) return Promise.reject('No such Toy')
-        const {name, price, inStock, labels, createdAt} = toy
-        toyToUpdate = {name, price, inStock, labels, createdAt}
+        toyToUpdate.name = toy.name
+        toyToUpdate.price = toy.price
+        toyToUpdate.inStock = toy.inStock
+        toyToUpdate.labels = toy.labels
+        toyToUpdate.createdAt = toy.createdAt
     } else {
         toy._id = _makeId()
         toys.push(toy)
     }
-    return _writeToysToFile().then(() => toy)
+    return _writeToysToFile()
 }
 
 function _makeId(length = 5) {
