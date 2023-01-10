@@ -19,7 +19,6 @@ export function ToyApp() {
     function onLoadToys(filterBy) {
         loadToys(filterBy)
             .then(() => {
-                showSuccessMsg('Toys loaded')
             })
             .catch(err => {
                 showErrorMsg('Cannot load toys')

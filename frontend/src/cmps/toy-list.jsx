@@ -6,8 +6,7 @@ export function ToyList(props) {
         <ul className="toy-list">
             {toys.map((toy) => (
                 <li className="toy-preview" key={toy._id}>
-                    <ToyPreview toy={toy} />
-                    <button onClick={() => onRemoveToy(toy._id)}>Remove</button>
+                    <ToyPreview toy={toy} onRemoveToy={onRemoveToy}/>
                 </li>
             ))}
         </ul>

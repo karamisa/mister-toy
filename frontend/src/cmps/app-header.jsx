@@ -1,6 +1,7 @@
 
 import { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import ResponsiveAppBar from './responsive-app-bar.jsx'
+
 import { UserMsg } from './user-msg.jsx'
 
 export function AppHeader() {
@@ -12,14 +13,7 @@ export function AppHeader() {
     return (
         <header>
             <UserMsg />
-            <div className='app-header'>
-                <div>LOGO</div>
-                <nav>
-                    <NavLink to="/">Home</NavLink> |
-                    <NavLink to="/toy">Toys</NavLink> |
-                    <NavLink to="/about">About</NavLink>
-                </nav>
-            </div>
+            <ResponsiveAppBar />
         </header>
     )
 }

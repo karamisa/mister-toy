@@ -10,7 +10,9 @@ export const toyService = {
     remove,
     getDefaultFilter,
     getToyLabels,
-    getEmptyToy
+    getEmptyToy,
+    getToyCountPerType,
+    getAvgToyPricePerType
 }
 
 
@@ -46,6 +48,37 @@ function getToyLabels() {
     const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
     return labels
 }
+
+function getAvgToyPricePerType(toys) {
+    const toyLabels = getToyLabels()
+    const avgPrices = []
+    const labelsWithToys = []
+    for (var i = 0; i < toyLabels.length; i++) {
+        const label = toyLabels[i]
+        const toysWithLabel = toys.filter(toy => toy.labels.includes(label))
+        if (toysWithLabel.length) {
+            const avgPrice = toysWithLabel.reduce((a, toy) => a + toy.price, 0) / toysWithLabel.length
+            avgPrices.push(avgPrice)
+            labelsWithToys.push(label)
+        }
+    }
+    return [labelsWithToys, avgPrices]
+}
+
+function getToyCountPerType(toys) {
+    const toyLabels = getToyLabels()
+    const counts = []
+    for (var i = 0; i < toyLabels.length; i++) {
+        const label = toyLabels[i]
+        const toysWithLabel = toys.filter(toy => toy.labels.includes(label))
+        counts.push(toysWithLabel.length)
+    }
+    console.log(toyLabels)
+    console.log(counts)
+    return [toyLabels, counts]
+
+}
+
 
 
 function getEmptyToy(){
