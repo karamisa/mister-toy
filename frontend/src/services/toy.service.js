@@ -18,14 +18,12 @@ export const toyService = {
 
 function query(filterBy = getDefaultFilter()) {
         const queryParams = `?name=${filterBy.name}&inStock=${filterBy.inStock}&labels=${filterBy.labels}&sortBy=${filterBy.sortBy}&desc=${filterBy.desc}`
+        console.log(queryParams)
         return httpService.get(BASE_URL + queryParams)
 }
 
 function getById(toyId) {
-    return httpService.get(BASE_URL + toyId).then(toy=>{
-        toy.msgs='I am a TOY'
-        return toy
-    })
+    return httpService.get(BASE_URL + toyId)
 }
 
 function save(toy) {

@@ -13,15 +13,19 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ToysIcon from '@mui/icons-material/Toys';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { logout } from '../store/user.action';
 
 
 
-const pages = [{name: 'Home', to: "/"},{name: 'Toys', to: "/toy"},{name: 'About', to: "/about"},{name: 'Dashboard', to: "/dashboard"}]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{ name: 'Home', to: "/" }, { name: 'Toys', to: "/toy" }, { name: 'About', to: "/about" }]
+const settings = [{ name: 'Profile', to: "" }, { name: 'Dashboard', to: "/dashboard" }];
 
-function ResponsiveAppBar() {
+export function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const user = useSelector((storeState) => storeState.userModule.user)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -37,9 +41,12 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+   const onLogout = () => {
+    logout()
+   }
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <ToysIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -129,39 +136,51 @@ function ResponsiveAppBar() {
                             </Button>
                         ))}
                     </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="userAvatar" src="/broken-image.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                    {(user) &&
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="userAvatar" src="/broken-image.jpg" />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                                        <Typography component={Link} to={setting.to} textAlign="center">{setting.name}</Typography>
+                                    </MenuItem>
+                                ))}
+                                <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
+                                <Typography component={Button} onClick={onLogout} textAlign="center">Logout</Typography>
                                 </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                            </Menu>
+                        </Box>
+                    }
+
+                    {(!user) &&
+                        <Button
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            component={Link}
+                            to={'/signin'}
+                        >
+                            Sign In
+                        </Button>}
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
-export default ResponsiveAppBar;

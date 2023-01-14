@@ -20,8 +20,8 @@ export function Dashboard() {
     const [toyLabels, toyCount] = toyService.getToyCountPerType(toys)
 
     return (
-        <section>
-            <h1 style={{ textAlign: 'center', padding: '20px' }}>DASHBOARDDD STATSS</h1>
+        <section className="main-layout">
+            <h1 style={{ "text-align": "center"}}>DASHBOARDDD STATSS</h1>
             <Paper elevation={7}>
                 <AvgPriceChart labelsData={labelsWithToys} priceData={avgPrices} />
             </Paper>

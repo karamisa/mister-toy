@@ -1,0 +1,86 @@
+::selection {
+    background-color: $clr1;
+    color: $clr3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html { 
+   font-family: Roboto, sans-serif; 
+   color: $clr2;
+   line-height: 1.8;
+   line-height: lh(26px);
+}
+
+body {
+    margin: 0;
+    background-color: $clr7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: 0 0 1rem;
+    line-height: lh(40px, 29px);
+}
+
+h1 {
+    font-size: rem(60px);
+}
+
+h2 {
+    font-size: em(16px);
+    margin: em(63px) 0;
+    grid-area: title;
+    color: $clr2;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: em(29px);
+}
+
+img {
+    width: 100%;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+.btn {
+    @include btn;
+    
+    &-dark {
+        @include btn($type: dark);
+    }
+    
+    &-light {
+        @include btn($type: light);
+    }
+}
+
+
+// links
+a {
+    color: $clr2;
+
+    &.active {
+        background-color: $clr1;
+        color: $clr2;
+    }
+}
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+  max-width: 100%
+}
+
+/* Simple and useful CSS Debugging Technique */
+.debug * {
+  outline: 1px solid gold
+}

@@ -1,0 +1,26 @@
+.toy-list {
+
+        ul {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+        .toy-preview {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+        }
+        
+        .toy-preview img {
+            max-width: 100px;
+        }
+        
+    }
+    

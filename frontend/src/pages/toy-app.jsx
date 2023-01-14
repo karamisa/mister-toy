@@ -41,9 +41,7 @@ export function ToyApp() {
         onLoadToys(filterBy)
     }
 
-    return <section>
-        <main>
-
+    return <section className='main-layout'>
             <ToyFilter onSetFilter={setFilter} />
             <Link to={`/toy/edit`}>Add Toy</Link>
             {isLoading && <p>Loading...</p>}
@@ -51,8 +49,5 @@ export function ToyApp() {
                 toys={toys}
                 onRemoveToy={onRemoveToy}
             />
-        </main>
     </section>
-
-
 }
